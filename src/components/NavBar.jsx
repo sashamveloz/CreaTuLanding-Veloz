@@ -1,19 +1,20 @@
 import CartWidget from './CartWidget'
+import { Link } from 'react-router'
 import logo from '../assets/logo.jpeg'
 
 function NavBar (){
     return (
     <nav className="navbar">
-        <div className='title'>
+        <Link to="/" className='title'>
             <img className="logo" src={logo} alt='Logo marca'/>
         <h1>MiTienda</h1>
-        </div>
+        </Link>
 
         <ul className="sections">
-        <li><a href="#">Cuidado de la piel</a></li>
-        <li><a href="#">Maquillaje</a></li>
-        <li><a href="#">Accesorios</a></li>
-        <li><a href="#">Fragancias</a></li>
+        <li><Link to="/categoria/cuidado_de_la_piel">Cuidado de la piel</Link></li>
+        <li><Link to="/categoria/maquillaje">Maquillaje</Link></li>
+        <li><Link to="/categoria/accesorios">Accesorios</Link></li>
+        <li><Link to="/categoria/fragancias">Fragancias</Link></li>
         </ul>
 
         
