@@ -1,4 +1,5 @@
 import Item from './Item'
+import { useState } from 'react'
 import { Link, useParams } from 'react-router'
 import hidratanteCerave from '../assets/hidratanteCerave.jpg'
 import protectorIsdin from '../assets/protectorIsdin.jpg'
@@ -12,6 +13,10 @@ import dysonAirwrap from '../assets/dysonAirwrap.jpeg'
 import cepilloGuerlain from '../assets/cepilloGuerlain.jpeg'
 import planchaGHD from '../assets/planchaGHD.jpeg'
 import secadorPhillips from '../assets/secadorPhillips.webp'
+import baseElf from '../assets/baseElf.png'
+import blushCT from '../assets/blushCT.webp'
+import eyeshadowGuerlain from '../assets/eyeshadowGuerlain.jpeg'
+import lipstickMilano from '../assets/lipstickMilano.png'
 
 const productos = [
     {
@@ -98,6 +103,34 @@ const productos = [
         precio: 213.00,
         imagen: secadorPhillips,
     },
+    {
+        id: 'base_elf',
+        categoria: 'maquillaje',
+        nombre: 'Base de maquillaje Elf',
+        precio: 23.99,
+        imagen: baseElf,
+    },
+    {
+        id: 'blush_charlotte_tilbury',
+        categoria: 'maquillaje',
+        nombre: 'Blush Charlotte Tilbury',
+        precio: 69.99,
+        imagen: blushCT,
+    },
+    {
+        id: 'sombras_guerlain',
+        categoria: 'maquillaje',
+        nombre: 'Sombras de ojos Guerlain',
+        precio: 48.00,
+        imagen: eyeshadowGuerlain,
+    },
+    {
+        id: 'barra_labios_milano',
+        categoria: 'maquillaje',
+        nombre: 'Barra de labios Milano',
+        precio: 15.89,
+        imagen: lipstickMilano,
+    },
 ];
 
 const categorias = [
@@ -109,6 +142,14 @@ const categorias = [
 
 function ItemListContainer ({text}) {
     const { categoriaId } = useParams();
+    const [productoAbiertoId, setProductoAbiertoId] = useState(null);
+    const [categoriaAnterior, setCategoriaAnterior] = useState(categoriaId);
+
+    // Reiniciar antes de renderizar los hijos de la nueva categoría.
+    if (categoriaAnterior !== categoriaId) {
+        setCategoriaAnterior(categoriaId);
+        setProductoAbiertoId(null);
+    }
     const categoria = categorias.find((categoria) => categoria.id === categoriaId);
     const productosVisibles = categoriaId
         ? productos.filter((producto) => producto.categoria === categoriaId)
@@ -137,6 +178,9 @@ function ItemListContainer ({text}) {
                     nombre={producto.nombre}
                     precio={producto.precio}
                     imagen={producto.imagen}
+                    girada={productoAbiertoId === producto.id}
+                    onAbrir={() => setProductoAbiertoId(producto.id)}
+                    onCerrar={() => setProductoAbiertoId(null)}
                 />
             ))}
         </div>

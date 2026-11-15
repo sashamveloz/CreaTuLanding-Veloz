@@ -5,6 +5,23 @@
   width: 100%;
 }
 
+.routeContent {
+  min-width: 0;
+  animation: routeEnter 200ms ease-out;
+}
+
+@keyframes routeEnter {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .navbar {
   display: flex;
   flex-wrap: wrap;
@@ -39,14 +56,12 @@
 }
 
 .sections li a:visited {
-  color: inherit; 
+  color: inherit;
 }
 
 .sections li a:hover {
   color: rgb(159, 80, 93);
-  transform: scale(-2px);
   box-shadow: 0 4px 15px currentColor;
-  
 }
 
 .logo {
@@ -99,11 +114,77 @@
   box-sizing: border-box;
   min-width: 0;
   width: 100%;
+  padding: 8px;
+  perspective: 1200px;
+}
+
+.itemInner {
+  display: grid;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease;
+}
+
+.itemFlipped .itemInner {
+  transform: rotateY(180deg) scale(1.02);
+}
+
+.itemFace {
+  grid-area: 1 / 1;
+  min-width: 0;
   padding: 20px;
+  backface-visibility: hidden;
   background-color: #fffaf8;
   border: 1px solid #ecd4db;
   border-radius: 16px;
   box-shadow: 0 4px 12px rgba(159, 80, 93, 0.1);
+}
+
+.itemBack {
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow-wrap: anywhere;
+}
+
+.itemButton {
+  margin-top: 16px;
+  padding: 6px 12px;
+  min-width: 44px;
+  min-height: 44px;
+  align-self: center;
+  border: 1px solid #804f5d;
+  border-radius: 20px;
+  background: #f9edf0;
+  color: #804f5d;
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.itemButton:focus-visible {
+  outline: 3px solid #804f5d;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .routeContent {
+    animation: none;
+  }
+
+  .itemInner {
+    transition: none;
+  }
+
+  .itemFlipped .itemInner,
+  .itemBack {
+    transform: none;
+  }
+
+  .itemFace[aria-hidden="true"] {
+    visibility: hidden;
+  }
 }
 
 .itemImage {

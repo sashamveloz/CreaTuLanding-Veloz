@@ -1,5 +1,5 @@
 import CartWidget from './CartWidget'
-import { Link } from 'react-router'
+import { Link, NavLink } from 'react-router'
 import logo from '../assets/logo.jpeg'
 
 function NavBar (){
@@ -11,10 +11,10 @@ function NavBar (){
         </Link>
 
         <ul className="sections">
-        <li><Link to="/categoria/cuidado_de_la_piel">Cuidado de la piel</Link></li>
-        <li><Link to="/categoria/maquillaje">Maquillaje</Link></li>
-        <li><Link to="/categoria/accesorios">Accesorios</Link></li>
-        <li><Link to="/categoria/fragancias">Fragancias</Link></li>
+        <li><NavLink to="/categoria/cuidado_de_la_piel" end>Cuidado de la piel</NavLink></li>
+        <li><NavLink to="/categoria/maquillaje" end>Maquillaje</NavLink></li>
+        <li><NavLink to="/categoria/accesorios" end>Accesorios</NavLink></li>
+        <li><NavLink to="/categoria/fragancias" end>Fragancias</NavLink></li>
         </ul>
 
         
